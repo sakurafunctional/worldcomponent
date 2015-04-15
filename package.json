@@ -1,0 +1,26 @@
+{
+  "name": "worldcomponent",
+  "version": "1.0.0",
+  "description": "world component tiny FRP module",
+  "main": "worldcomponent.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakurafunctional/worldcomponent"
+  },
+  "keywords": [
+    "world",
+    "component",
+    "tiny",
+    "FRP",
+    "module"
+  ],
+  "author": "sakurafunctional",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sakurafunctional/worldcomponent/issues"
+  },
+  "homepage": "https://github.com/sakurafunctional/worldcomponent"
+}
