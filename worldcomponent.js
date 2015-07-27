@@ -1,69 +1,65 @@
-'use strict';
+(function() {
+  'use strict';
 
-var worldcomponent = function(initialVal)
-{
-  var computingF = [];
-  var value = {};
-  var state;
-  Object.defineProperties(value,
-  {
-    val: //value.val
-    {
-      get: function()
+  var worldcomponent = function() {
+    var computingF = [];
+
+    var value = {};
+    var state;
+
+    Object.defineProperties(value,
       {
-        return state;
+        val: //value.val
+        {
+          get() {
+            return state;
+          },
+          set(x) {
+            state = x;
+            computingF.map(
+              function(f) {
+                f(x);
+              });
+            return;
+          }
+        }
+      });
+
+    var o = {
+      compute(f) {
+        var f1 = function() {
+          computingF[computingF.length] = f; //push  f
+        };
+        return f1;
       },
-      set: function(x)
-      {
-        state = x;
-        computingF.map(
-          function(f)
-          {
-            f(x);
-          });
-        return;
+      appear(a) {
+        var f1 = function() {
+          value.val = a;
+        };
+        return f1;
+      },
+      now() {
+        return value.val;
       }
-    }
-  });
-  var o = {
-    compute: function(f)
-    {
-      var f1 = function()
-      {
-        computingF[computingF.length] = f; //push  f
-        value.val = initialVal;
-      };
-      return f1;
-    },
-    appear: function(a)
-    {
-      var f1 = function(){value.val = a;};
-      return f1;
-    },
-    now: function()
-    {
-      return value.val;
-    }
+    };
+
+    return o;
   };
 
-  return o;
-};
-
-Object.defineProperties(worldcomponent,
-{
-  world: //our physical world
-  {
-    set: function(f)
+  Object.defineProperties(worldcomponent,
     {
-      return f();
-    }
-  }
-});
+      world: //our physical world
+      {
+        set(f) {
+          return f();
+        }
+      }
+    });
 
-worldcomponent.log = function(a)
-{
-  var f = console.log.bind(console, a);
-  return f;
-};
+  worldcomponent.log = function(a) {
+    var f = console.log.bind(console, a);
+    return f;
+  };
 
-module.exports = worldcomponent;
+  module.exports = worldcomponent;
+})();
